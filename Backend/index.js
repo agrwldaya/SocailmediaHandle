@@ -7,6 +7,7 @@ import errorHandler from "./Middleware/errorhandler.js";
 import AuthRoute from "./Routes/authRoute.js";
 import postrouter from "./Routes/postRoute.js";
 import { cloudinaryconnect } from "./Config/Claudinary.js";
+import fileUpload from "express-fileupload";
 
  
 const app = express();
@@ -16,6 +17,12 @@ const PORT = process.env.PORT || 5000;
 dbconnect();
 cloudinaryconnect();
 // Middleware
+
+
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
 app.use(cors(
   {
     origin:"https://socailmedia-handle.vercel.app"

@@ -14,7 +14,7 @@ function Login({role}) {
     e.preventDefault();
     // Handle login logic here
     console.log('Login submitted', { email, password });
-    
+   
     try {
         const response = await axios.post("https://socailmediahandle.onrender.com/api/auth/login",{email, password,role})
         if(response.data.success){

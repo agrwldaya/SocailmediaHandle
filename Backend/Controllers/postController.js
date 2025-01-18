@@ -1,3 +1,4 @@
+import cloudinary from 'cloudinary';
 import { Admin } from "../Models/Admin.js";
 import Post from "../Models/Post.js";
 import { User } from "../Models/User.js";
@@ -17,7 +18,9 @@ const uploadFile = async (file, folder, quality) => {
               // Validate required fields
               const { name, socialMediaHandle } = req.body;
               const userId = req.user.id;
-              console.log(userId)
+             console.log(req.body)
+            console.log(req.files)
+
               if (!name || !socialMediaHandle || !userId) {
                 return res.status(400).json({ success: false, message: "Missing required fields." });
               }
@@ -25,7 +28,7 @@ const uploadFile = async (file, folder, quality) => {
               if (!req.files || req.files.length === 0) {
                 return res.status(400).json({ success: false, message: "No images provided." });
               }
-        
+           
               // Generate image URLs
               let uploadedImagesUrls = [];
               if (req.files && req.files.images) {

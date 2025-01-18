@@ -7,7 +7,7 @@ const postrouter = express.Router();
  
 
 // Routes
-postrouter.post('/createpost', authMiddleware,postController.createPost );
+postrouter.post('/createpost', authMiddleware, postController.createPost );
 postrouter.get('/getallpost',authMiddleware, postController.getAllPost);
 postrouter.get('/myallpost',authMiddleware, postController.myAllPost);
 
