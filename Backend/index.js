@@ -6,6 +6,7 @@ import errorHandler from "./Middleware/errorhandler.js";
  
 import AuthRoute from "./Routes/authRoute.js";
 import postrouter from "./Routes/postRoute.js";
+import { cloudinaryconnect } from "./Config/Claudinary.js";
 
  
 const app = express();
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB();
 dbconnect();
+cloudinaryconnect();
 // Middleware
 app.use(cors(
   {

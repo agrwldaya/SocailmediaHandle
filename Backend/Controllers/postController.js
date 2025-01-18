@@ -2,6 +2,13 @@ import { Admin } from "../Models/Admin.js";
 import Post from "../Models/Post.js";
 import { User } from "../Models/User.js";
 
+
+const uploadFile = async (file, folder, quality) => {
+  const options = { folder, resource_type: "auto" };
+  if (quality) options.quality = quality;
+  return await cloudinary.uploader.upload(file.tempFilePath, options);
+};
+
   const postController = {
     // Create new user with images
      
@@ -20,15 +27,33 @@ import { User } from "../Models/User.js";
               }
         
               // Generate image URLs
-              const imageUrls = req.files.map((file) =>
-                `${req.protocol}://${req.get('host')}/uploads/${file.filename}`
-              );
+              let uploadedImagesUrls = [];
+              if (req.files && req.files.images) {
+                const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+                const supportedTypes = ["jpg", "jpeg", "png", "pdf"];
+          
+                for (const image of images) {
+                  const docType = image.name.split('.').pop().toLowerCase();
+                  if (!supportedTypes.includes(docType)) {
+                    return res.status(400).json({
+                      success: false,
+                      message: "File type not supported for documents!",
+                    });
+                  }
+                }
+          
+                const uploadImagesPromises = images.map(async (image) => {
+                  const response = await uploadFile(image, process.env.FOLDER_NAME);
+                  return response.url;
+                });
+                uploadedImagesUrls = await Promise.all(uploadImagesPromises);
+              }
         
               // Create a new post
               const post = new Post({
                 name,
                 socialMediaHandle,
-                images: imageUrls,
+                images: uploadedImagesUrls,
               });
         
               // Save the post to the database
