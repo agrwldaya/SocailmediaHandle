@@ -43,7 +43,7 @@ function Welcome() {
     if (isAuthenticated) {
       navigate('/createpost');
     } else {
-      navigate('/login');
+      navigate('/login-user');
       toast.success('Login Please!!');
     }
   };
