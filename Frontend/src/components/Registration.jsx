@@ -17,7 +17,7 @@ function Register() {
     console.log('Registration submitted', { username, email, password });
       
     try {
-        const response = await axios.post("http://localhost:4000/api/auth/register",{username, email, password,role:"user"})
+        const response = await axios.post("https://socailmediahandle.onrender.com/api/auth/register",{username, email, password,role:"user"})
         if(response.data.success){
             toast.success(response.data.message);
             localStorage.setItem("token",response.data.token)

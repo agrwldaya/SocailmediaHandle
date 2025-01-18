@@ -12,7 +12,7 @@ function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/post/getallpost'  ,{headers:{token}});
+      const response = await axios.get('https://socailmediahandle.onrender.com/api/post/getallpost'  ,{headers:{token}});
    
       setUsers(response.data.allpost);
       setError('');

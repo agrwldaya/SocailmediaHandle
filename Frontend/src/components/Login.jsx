@@ -16,7 +16,7 @@ function Login({role}) {
     console.log('Login submitted', { email, password });
     
     try {
-        const response = await axios.post("http://localhost:4000/api/auth/login",{email, password,role})
+        const response = await axios.post("https://socailmediahandle.onrender.com/api/auth/login",{email, password,role})
         if(response.data.success){
              console.log(response.data)
             toast.success(response.data.message);

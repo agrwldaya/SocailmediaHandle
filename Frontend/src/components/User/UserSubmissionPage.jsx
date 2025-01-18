@@ -28,7 +28,7 @@ function UserSubmissionForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/api/post/createpost', formData ,{headers:{token}});
+      const response = await axios.post('https://socailmediahandle.onrender.com/api/post/createpost', formData ,{headers:{token}});
       console.log(response)
       if (response.data.success) {
         toast.success('Submission successful!');

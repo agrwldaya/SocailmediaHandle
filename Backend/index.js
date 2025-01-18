@@ -14,7 +14,11 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB();
 dbconnect();
 // Middleware
-app.use(cors());
+app.use(cors(
+  {
+    origin:"https://socailmedia-handle.vercel.app"
+  }
+));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
