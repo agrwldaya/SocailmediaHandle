@@ -16,7 +16,7 @@ dbconnect();
 // Middleware
 app.use(cors(
   {
-    origin:"https://socailmedia-handle.vercel.app/"
+    origin:"https://socailmedia-handle.vercel.app"
   }
 ));
 app.use(express.json());
